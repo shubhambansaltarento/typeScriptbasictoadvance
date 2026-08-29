@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enums</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Enums</h1>
+
+    <section class="explanation">
+      <p>Enums let you define a set of named constants.</p>
+      <pre><code>enum OrderStatus {
+  Pending,
+  Processing,
+  Shipped,
+  Delivered
+}
+
+const status: OrderStatus = OrderStatus.Pending;</code></pre>
+      <p>By default the members are numbered from 0:</p>
+      <pre><code>OrderStatus.Pending    // 0
+OrderStatus.Processing // 1
+OrderStatus.Shipped    // 2
+OrderStatus.Delivered  // 3</code></pre>
+      <p>You can specify the values explicitly instead:</p>
+      <pre><code>enum OrderStatus {
+  Pending = "PENDING",
+  Processing = "PROCESSING",
+  Shipped = "SHIPPED",
+  Delivered = "DELIVERED"
+}</code></pre>
+
+      <h2>Modern TypeScript consideration</h2>
+      <p>For many application cases, this:</p>
+      <pre><code>type OrderStatus =
+  | "PENDING"
+  | "PROCESSING"
+  | "SHIPPED"
+  | "DELIVERED";</code></pre>
+      <p>
+        is preferable to an enum because it doesn't create a runtime enum object - it's erased entirely at compile
+        time. You should understand enums for interviews, but don't automatically reach for them.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

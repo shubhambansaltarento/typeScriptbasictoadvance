@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Optional Properties</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Optional Properties</h1>
+
+    <section class="explanation">
+      <p>Use <code>?</code> when a property may not exist.</p>
+      <pre><code>interface User {
+  id: number;
+  name: string;
+  phone?: string;
+}
+
+const user1: User = { id: 1, name: "Shubham" };
+const user2: User = { id: 2, name: "Rahul", phone: "9999999999" };</code></pre>
+      <p>Both are valid. But <code>user1.phone</code> is considered <code>string | undefined</code>, so:</p>
+      <pre><code>if (user1.phone) {
+  console.log(user1.phone.toUpperCase());
+}</code></pre>
+
+      <h2>Important distinction</h2>
+      <p>
+        Optional (<code>phone?: string</code>) means the property may be missing. Whereas
+        <code>phone: string | undefined</code> means the property exists, but its value can be
+        <code>undefined</code>. This distinction becomes important when using strict TypeScript settings.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

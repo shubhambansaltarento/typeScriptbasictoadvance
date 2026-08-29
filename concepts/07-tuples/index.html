@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuples</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Tuples</h1>
+
+    <section class="explanation">
+      <p>A tuple is an array with a <strong>fixed structure and known positions.</strong></p>
+      <pre><code>let user: [number, string];
+
+user = [1, "Shubham"]; // &#9989;
+user = ["Shubham", 1]; // &#10060;</code></pre>
+      <p>Because index 0 must be a <code>number</code> and index 1 must be a <code>string</code>.</p>
+
+      <h2>Example</h2>
+      <pre><code>type ProductRecord = [number, string, number];
+
+const product: ProductRecord = [101, "Laptop", 75000];
+// meaning: [productId, productName, price]</code></pre>
+
+      <h2>Optional tuple elements</h2>
+      <pre><code>type User = [number, string, string?];
+
+const user1: User = [1, "Shubham"];
+const user2: User = [1, "Shubham", "Bangalore"];</code></pre>
+
+      <h2>Rest elements</h2>
+      <pre><code>type Coordinates = [number, number, ...number[]];
+
+const point: Coordinates = [10, 20, 30, 40];</code></pre>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

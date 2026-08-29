@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>void</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>void</h1>
+
+    <section class="explanation">
+      <p><code>void</code> generally means: <strong>this function doesn't return a meaningful value.</strong></p>
+      <pre><code>function logMessage(message: string): void {
+  console.log(message);
+}
+
+logMessage("Hello"); // no meaningful result</code></pre>
+
+      <h2>Compare</h2>
+      <pre><code>function getName(): string {
+  return "Shubham";
+}
+
+function logName(): void {
+  console.log("Shubham");
+}</code></pre>
+
+      <h2>void vs never</h2>
+      <pre><code>function test1(): void {
+  console.log("hello");
+}
+// the function finishes normally
+
+function test2(): never {
+  throw new Error("Failed");
+}
+// the function never finishes normally</code></pre>
+      <pre><code>void
+ &darr;
+function finishes
+ &darr;
+no useful return value
+
+
+never
+ &darr;
+function never completes normally</code></pre>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>unknown</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>unknown</h1>
+
+    <section class="explanation">
+      <p><code>unknown</code> means: <strong>I don't know what this value is yet.</strong></p>
+      <pre><code>let value: unknown;
+
+value = 10;
+value = "hello";
+value = true; // all valid</code></pre>
+      <p>But you cannot directly use it:</p>
+      <pre><code>console.log(value.toUpperCase());
+// &#10060; Object is of type 'unknown'</code></pre>
+      <p>You have to narrow it first:</p>
+      <pre><code>if (typeof value === "string") {
+  console.log(value.toUpperCase());
+}</code></pre>
+
+      <h2>Why is unknown better than any?</h2>
+      <pre><code>let data: any;
+data.foo.bar.baz(); // TypeScript doesn't complain
+
+let data2: unknown;
+data2.foo.bar.baz(); // &#10060; TypeScript forces you to verify the type</code></pre>
+
+      <h2>API example</h2>
+      <pre><code>async function getData(): Promise&lt;unknown&gt; {
+  const response = await fetch("/api/products");
+  return response.json();
+}
+
+const data = await getData();
+if (Array.isArray(data)) {
+  console.log(data);
+}</code></pre>
+
+      <h2>Mental model</h2>
+      <ul>
+        <li><code>any</code> &rarr; "Trust me."</li>
+        <li><code>unknown</code> &rarr; "Prove it."</li>
+      </ul>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

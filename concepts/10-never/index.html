@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>never</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>never</h1>
+
+    <section class="explanation">
+      <p><code>never</code> represents <strong>a value that will never exist.</strong></p>
+      <p>Most commonly, a function that never successfully returns:</p>
+      <pre><code>// Infinite loop
+function infiniteLoop(): never {
+  while (true) {
+    console.log("running");
+  }
+}
+
+// Function that always throws
+function throwError(message: string): never {
+  throw new Error(message);
+}</code></pre>
+      <p>There is no return - the function starts, throws, and never returns.</p>
+
+      <h2>Very important use: exhaustive checking</h2>
+      <pre><code>type Status = "pending" | "success" | "failed";
+
+function handleStatus(status: Status) {
+  switch (status) {
+    case "pending": return "Waiting";
+    case "success": return "Done";
+    case "failed":  return "Failed";
+    default: return assertNever(status);
+  }
+}
+
+function assertNever(value: never): never {
+  throw new Error(`Unexpected value: ${value}`);
+}</code></pre>
+      <p>
+        Now if you later add <code>"cancelled"</code> to <code>Status</code> without adding a matching
+        <code>case</code>, TypeScript will tell you that your <code>switch</code> isn't exhaustive - because
+        <code>status</code> in the <code>default</code> branch no longer narrows to <code>never</code>. This is a
+        very useful senior-level TypeScript technique.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

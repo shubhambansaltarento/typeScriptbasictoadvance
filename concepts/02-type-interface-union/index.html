@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>type / interface / union</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>type / interface / union</h1>
+
+    <section class="explanation">
+      <p>
+        <code>type</code> and <code>interface</code> both describe the shape of a value. Most of the time they're
+        interchangeable for plain objects - the differences only matter once you reach for composition, or need
+        declaration merging.
+      </p>
+
+      <h2>type: object shapes and aliases</h2>
+      <p>
+        <code>type</code> can name any shape, not just objects - including a primitive alias like
+        <code>type UserId = number</code>.
+      </p>
+
+      <h2>type: composing with intersections (&amp;)</h2>
+      <p>
+        <code>type ProductWithStock = Product &amp; { stock: number }</code> combines two shapes into one. This is
+        the main reason to reach for <code>type</code> over <code>interface</code>: intersections, unions, and
+        tuples are all things a plain <code>interface</code> cannot express on its own.
+      </p>
+
+      <h2>type: unions and tuples</h2>
+      <p>
+        A union (<code>"pending" | "success" | "failed"</code>) says a value is one of several fixed options. A
+        tuple (<code>[number, number]</code>) is a fixed-length array where each position has its own type.
+      </p>
+
+      <h2>interface: object shapes</h2>
+      <p>
+        <code>interface</code> reads almost identically to an object <code>type</code>, but is meant specifically
+        for describing the shape of objects (and can be <code>extend</code>ed by other interfaces).
+      </p>
+
+      <h2>interface: declaration merging</h2>
+      <p>
+        Declare an <code>interface</code> with the same name twice, and TypeScript merges both declarations into
+        one shape. A <code>type</code> alias can never do this - redeclaring a <code>type</code> name is always an
+        error.
+      </p>
+
+      <h2>Practical rule</h2>
+      <p>
+        For simple object models (frontend/API shapes), either works - <code>interface</code> is a perfectly
+        reasonable default. Reach for <code>type</code> as soon as you need a union, an intersection, or a tuple.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

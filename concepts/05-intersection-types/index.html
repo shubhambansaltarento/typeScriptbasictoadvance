@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intersection Types</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Intersection Types</h1>
+
+    <section class="explanation">
+      <p>Intersection means: <strong>combine multiple types together.</strong></p>
+      <pre><code>type User = { id: number; name: string };
+type Employee = { department: string };
+
+type EmployeeUser = User &amp; Employee;
+
+const employee: EmployeeUser = {
+  id: 1,
+  name: "Shubham",
+  department: "Engineering"
+};</code></pre>
+      <p>Think of it as:</p>
+      <pre><code>User
+   +
+Employee
+   &darr;
+EmployeeUser</code></pre>
+
+      <h2>Common real-world usage</h2>
+      <p>Suppose your backend returns a <code>Product</code>, and the frontend needs to add its own UI state:</p>
+      <pre><code>type Product = { id: number; name: string; price: number };
+type ProductUIState = { isSelected: boolean; isLoading: boolean };
+
+type ProductViewModel = Product &amp; ProductUIState;</code></pre>
+      <p>Now a single value carries both the server data and the UI-only fields.</p>
+
+      <h2>Union vs Intersection</h2>
+      <p>Remember this:</p>
+      <ul>
+        <li><code>A | B</code> means <strong>A OR B</strong> - satisfies one side or the other.</li>
+        <li><code>A &amp; B</code> means <strong>A AND B</strong> - must satisfy both at once.</li>
+      </ul>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

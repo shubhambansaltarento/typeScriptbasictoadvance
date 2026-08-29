@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Union Types</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Union Types</h1>
+
+    <section class="explanation">
+      <p>A union means: <strong>this value can be one of several types.</strong></p>
+      <pre><code>type ID = string | number;
+
+let id: ID;
+id = 100;       // &#9989;
+id = "USR-100"; // &#9989;
+id = true;      // &#10060;</code></pre>
+
+      <h2>Real API example</h2>
+      <p>
+        Unions shine when a value can genuinely take more than one shape - like an API response that either
+        succeeded or failed:
+      </p>
+      <pre><code>type ApiResponse =
+  | { success: true; data: Product[] }
+  | { success: false; error: string };
+
+function handleResponse(response: ApiResponse) {
+  if (response.success) {
+    console.log(response.data);
+  } else {
+    console.log(response.error);
+  }
+}</code></pre>
+      <p>
+        This is extremely important in TypeScript. You're telling the compiler: <em>there are multiple possible
+        shapes, and you need to figure out which one we're dealing with.</em> Checking <code>response.success</code>
+        inside the <code>if</code> is what lets TypeScript narrow <code>response</code> to the right branch - this
+        leads directly to <strong>type narrowing</strong>.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

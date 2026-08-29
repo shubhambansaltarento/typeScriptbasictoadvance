@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Assertions</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Type Assertions</h1>
+
+    <section class="explanation">
+      <p>A type assertion tells TypeScript: <strong>I know more about this value than you do.</strong></p>
+      <pre><code>const value = something as string;</code></pre>
+      <pre><code>const input = document.querySelector("#username");
+const username = input as HTMLInputElement;
+
+console.log(username.value);
+// "I know this DOM element is an HTMLInputElement."</code></pre>
+
+      <h2>Important: assertions don't convert at runtime</h2>
+      <pre><code>const value = "123" as unknown as number;
+// does NOT turn "123" into 123 - it's still "123"</code></pre>
+      <p>If you want conversion:</p>
+      <pre><code>const value = Number("123");</code></pre>
+
+      <h2>Assertion vs validation</h2>
+      <p>Bad, if you don't actually know the response shape:</p>
+      <pre><code>const user = response as User;</code></pre>
+      <p>Better for untrusted external data:</p>
+      <pre><code>API
+ &darr;
+unknown
+ &darr;
+validate
+ &darr;
+User</code></pre>
+      <p>Libraries such as Zod are commonly used for this pattern.</p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

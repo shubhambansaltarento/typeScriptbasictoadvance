@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Types</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Basic Types</h1>
+
+    <section class="explanation">
+      <p>
+        TypeScript adds type annotations on top of every value JavaScript already has. Writing
+        <code>let name: string</code> tells the compiler exactly what <code>name</code> is allowed to hold, so
+        assigning something of the wrong shape becomes a compile-time error instead of a bug you find at runtime.
+      </p>
+
+      <h2>The primitives</h2>
+      <ul>
+        <li><code>string</code>, <code>number</code>, <code>boolean</code> - the everyday JavaScript primitives.</li>
+        <li>
+          <code>bigint</code> - for integers larger than <code>number</code> can safely represent, written with an
+          <code>n</code> suffix like <code>100n</code>.
+        </li>
+        <li><code>null</code> and <code>undefined</code> - each is both a value and its own type.</li>
+        <li>
+          <code>symbol</code> - a guaranteed-unique value, often used as a hidden/collision-free object key.
+        </li>
+      </ul>
+
+      <h2>Why annotate at all?</h2>
+      <p>
+        TypeScript can usually <em>infer</em> these types from the initializer (<code>let age = 33</code> is already
+        known to be a <code>number</code>). Writing the annotation explicitly is most useful for function parameters,
+        return types, and variables that start empty - anywhere the compiler has nothing to infer from yet.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

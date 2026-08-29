@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Combining Everything</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Combining Everything</h1>
+
+    <section class="explanation">
+      <p>For an e-commerce TypeScript project, you could combine everything from this series like this:</p>
+      <pre><code>type ProductStatus =
+  | "ACTIVE"
+  | "OUT_OF_STOCK"
+  | "DISCONTINUED";
+
+interface Product {
+  readonly id: number;
+  name: string;
+  price: number;
+  description?: string;
+  status: ProductStatus;
+}
+
+type ProductWithStock = Product &amp; { stock: number };
+
+type ProductResponse =
+  | { success: true; data: ProductWithStock[] }
+  | { success: false; error: string };
+
+interface ProductCache {
+  [productId: string]: ProductWithStock;
+}
+
+function handleProducts(response: ProductResponse): void {
+  if (response.success) {
+    response.data.forEach(product => console.log(product.name));
+  } else {
+    console.error(response.error);
+  }
+}</code></pre>
+
+      <p>This single example contains:</p>
+      <pre><code>type              &rarr; ProductStatus / ProductResponse
+interface         &rarr; Product / ProductCache
+union             &rarr; ProductStatus / ProductResponse
+intersection      &rarr; ProductWithStock
+literal           &rarr; "ACTIVE", "OUT_OF_STOCK"
+optional          &rarr; description?
+readonly          &rarr; id
+index signature   &rarr; ProductCache
+void              &rarr; handleProducts()</code></pre>
+      <p>
+        And you can add <code>function assertNever(value: never): never { ... }</code> for exhaustive handling of
+        <code>ProductStatus</code> in a <code>switch</code>.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

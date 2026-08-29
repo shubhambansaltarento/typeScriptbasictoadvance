@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>readonly</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>readonly</h1>
+
+    <section class="explanation">
+      <p><code>readonly</code> prevents reassignment through that type.</p>
+      <pre><code>interface Product {
+  readonly id: number;
+  name: string;
+}
+
+const product: Product = { id: 101, name: "Laptop" };
+
+product.name = "MacBook"; // works
+
+product.id = 200;
+// &#10060; Cannot assign to 'id' because it is a read-only property</code></pre>
+      <p>Very useful for entities - the ID should generally not be changed after creation:</p>
+      <pre><code>interface User {
+  readonly id: string;
+  name: string;
+}</code></pre>
+
+      <h2>Important limitation</h2>
+      <p>
+        <code>readonly</code> is a TypeScript compile-time restriction. It doesn't magically freeze the JavaScript
+        object at runtime. For actual runtime immutability, <code>Object.freeze(product)</code> is a different
+        mechanism.
+      </p>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>

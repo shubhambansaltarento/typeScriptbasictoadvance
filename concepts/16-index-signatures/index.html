@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index Signatures</title>
+    <link rel="stylesheet" href="../_shared/styles.css" />
+  </head>
+  <body>
+    <p><a href="../../index.html">&larr; back</a></p>
+    <h1>Index Signatures</h1>
+
+    <section class="explanation">
+      <p>Index signatures are used when you don't know the exact property names ahead of time.</p>
+      <pre><code>interface ProductPrices {
+  [productId: string]: number;
+}
+
+const prices: ProductPrices = {
+  laptop: 75000,
+  phone: 50000,
+  tablet: 30000
+};
+
+const productId = "laptop";
+console.log(prices[productId]);</code></pre>
+
+      <h2>Another example</h2>
+      <p>Suppose an API returns dynamic configuration - you don't know all the keys beforehand:</p>
+      <pre><code>interface Config {
+  [key: string]: string;
+}
+
+const config: Config = {
+  apiUrl: "https://api.example.com",
+  environment: "production",
+  version: "1.0"
+};</code></pre>
+
+      <h2>Number index</h2>
+      <pre><code>interface Scores {
+  [index: number]: number;
+}
+
+const scores: Scores = { 0: 95, 1: 87, 2: 91 };</code></pre>
+    </section>
+
+    <section class="playground">
+      <h2>Try it</h2>
+      <div class="toolbar">
+        <button id="run">Run &#9654;</button>
+        <button id="reset">Reset</button>
+      </div>
+      <div id="editor"></div>
+      <pre id="output"></pre>
+      <p class="hint">
+        Edit the code and hit Run. <code>log(...)</code> works like <code>console.log</code> and prints here too.
+      </p>
+    </section>
+
+    <script type="module" src="/concepts/_shared/app.ts"></script>
+  </body>
+</html>
